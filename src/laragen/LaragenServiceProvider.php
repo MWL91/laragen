@@ -19,6 +19,8 @@ final class LaragenServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->loadCommands();
         }
+
+        $this->loadViewsFrom(__DIR__ . '/template/code', 'laragen');
     }
 
     private function loadDependencies(): void

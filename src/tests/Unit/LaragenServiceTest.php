@@ -2,11 +2,17 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Mwl91\Laragen\LaragenServiceProvider;
+use Orchestra\Testbench\TestCase;
 use Mwl91\Laragen\Services\LaragenService;
 
 class LaragenServiceTest extends TestCase
 {
+    protected function getPackageProviders($app)
+    {
+        return [LaragenServiceProvider::class];
+    }
+
     /**
      * GenerateScaffold test.
      *
@@ -15,6 +21,6 @@ class LaragenServiceTest extends TestCase
     public function testGenerateScaffold()
     {
         $laragenService = new LaragenService();
-        $this->assertNull($laragenService->generateScaffold('example'));
+        $this->assertNotNull($laragenService->generateScaffold('example'));
     }
 }

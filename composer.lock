@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fd6ee0070a91dd81bdaa13f24a01d317",
+    "content-hash": "d8e173458a477dd61ac0f6ddbd9eed5a",
     "packages": [
         {
             "name": "brick/math",
@@ -2803,6 +2803,56 @@
             "time": "2019-10-21T16:45:58+00:00"
         },
         {
+            "name": "fzaninotto/faker",
+            "version": "v1.9.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/fc10d778e4b84d5bd315dad194661e091d307c6f",
+                "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3 || ^7.0"
+            },
+            "require-dev": {
+                "ext-intl": "*",
+                "phpunit/phpunit": "^4.8.35 || ^5.7",
+                "squizlabs/php_codesniffer": "^2.9.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2019-12-12T13:22:17+00:00"
+        },
+        {
             "name": "hamcrest/hamcrest-php",
             "version": "v2.0.0",
             "source": {
@@ -2962,6 +3012,122 @@
                 "object graph"
             ],
             "time": "2020-01-17T21:11:47+00:00"
+        },
+        {
+            "name": "orchestra/testbench",
+            "version": "v5.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orchestral/testbench.git",
+                "reference": "e36bdb5fc599495f46a8b2fd3a5e6ffed044e095"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orchestral/testbench/zipball/e36bdb5fc599495f46a8b2fd3a5e6ffed044e095",
+                "reference": "e36bdb5fc599495f46a8b2fd3a5e6ffed044e095",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^7.1",
+                "mockery/mockery": "^1.3.1",
+                "orchestra/testbench-core": "^5.1",
+                "php": ">=7.2.5",
+                "phpunit/phpunit": "^8.4 || ^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "6.0-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mior Muhammad Zaki",
+                    "email": "crynobone@gmail.com",
+                    "homepage": "https://github.com/crynobone"
+                }
+            ],
+            "description": "Laravel Testing Helper for Packages Development",
+            "homepage": "http://orchestraplatform.com/docs/latest/components/testbench/",
+            "keywords": [
+                "BDD",
+                "TDD",
+                "laravel",
+                "orchestra-platform",
+                "orchestral",
+                "testing"
+            ],
+            "time": "2020-03-10T17:14:11+00:00"
+        },
+        {
+            "name": "orchestra/testbench-core",
+            "version": "v5.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orchestral/testbench-core.git",
+                "reference": "22526c9e2ef10551c8032ca27ef3243319d63dd7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/22526c9e2ef10551c8032ca27ef3243319d63dd7",
+                "reference": "22526c9e2ef10551c8032ca27ef3243319d63dd7",
+                "shasum": ""
+            },
+            "require": {
+                "fzaninotto/faker": "^1.9.1",
+                "php": ">=7.2.5"
+            },
+            "require-dev": {
+                "laravel/framework": "^7.1",
+                "laravel/laravel": "dev-master",
+                "mockery/mockery": "^1.3.1",
+                "orchestra/canvas": "^5.0",
+                "phpunit/phpunit": "^8.4 || ^9.0"
+            },
+            "suggest": {
+                "laravel/framework": "Required for testing (^7.1).",
+                "mockery/mockery": "Allow using Mockery for testing (^1.3.1).",
+                "orchestra/testbench-browser-kit": "Allow using legacy Laravel BrowserKit for testing (^5.0).",
+                "orchestra/testbench-dusk": "Allow using Laravel Dusk for testing (^5.0).",
+                "phpunit/phpunit": "Allow using PHPUnit for testing (^8.4 || ^9.0)."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Orchestra\\Testbench\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mior Muhammad Zaki",
+                    "email": "crynobone@gmail.com",
+                    "homepage": "https://github.com/crynobone"
+                }
+            ],
+            "description": "Testing Helper for Laravel Development",
+            "homepage": "http://orchestraplatform.com/docs/latest/components/testbench/",
+            "keywords": [
+                "BDD",
+                "TDD",
+                "laravel",
+                "orchestra-platform",
+                "orchestral",
+                "testing"
+            ],
+            "time": "2020-04-11T10:47:11+00:00"
         },
         {
             "name": "phar-io/manifest",
