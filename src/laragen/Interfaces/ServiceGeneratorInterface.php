@@ -4,5 +4,5 @@ namespace Mwl91\Laragen\Interfaces;
 
 interface ServiceGeneratorInterface
 {
-    public function generate(string $name): string;
+    public function generate(string $name): void;
 }

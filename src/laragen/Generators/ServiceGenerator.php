@@ -2,31 +2,32 @@
 
 namespace Mwl91\Laragen\Generators;
 
-use Illuminate\Support\Facades\View;
+use Nette\PhpGenerator\Printer;
+use Nette\PhpGenerator\ClassType;
+use Nette\PhpGenerator\PhpNamespace;
+use Mwl91\Laragen\Enums\ClassTypeEnum;
 use Mwl91\Laragen\Interfaces\GeneratorInterface;
 use Mwl91\Laragen\Interfaces\ServiceGeneratorInterface;
 
-class ServiceGenerator implements GeneratorInterface, ServiceGeneratorInterface
+class ServiceGenerator extends Generator implements GeneratorInterface, ServiceGeneratorInterface
 {
-    public function generate(string $name): string
+    public function generate(string $name): void
     {
-        $class = new \Nette\PhpGenerator\ClassType('Demo');
+        $namespace = new PhpNamespace('App\\Http\\Controllers');
+
+        $class = new ClassType($this->makeClassName($name, ClassTypeEnum::SERVICE));
+        $namespace->add($class);
 
         $class
+            ->addImplement('Countable')
             ->setFinal()
             ->setExtends('ParentClass')
-            ->addImplement('Countable')
             ->addTrait('Nette\SmartObject')
             ->addComment("Description of class.\nSecond line\n")
             ->addComment('@property-read Nette\Forms\Form $form');
 
-        // to generate PHP code simply cast to string or use echo:
-        echo $class;
-
         // or use printer:
-        $printer = new \Nette\PhpGenerator\Printer;
+        $printer = new Printer;
         echo $printer->printClass($class);
-
-        return View::make('laragen::controller')->render();
     }
 }
