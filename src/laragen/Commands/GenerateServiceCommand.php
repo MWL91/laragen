@@ -3,34 +3,34 @@
 namespace Mwl91\Laragen\Commands;
 
 use Illuminate\Console\Command;
-use Mwl91\Laragen\Services\Interfaces\LaragenServiceInterface;
+use Mwl91\Laragen\Interfaces\ServiceGeneratorInterface;
 
-class GenerateScaffoldCommand extends Command
+class GenerateServiceCommand extends Command
 {
-    private LaragenServiceInterface $laragenService;
+    private ServiceGeneratorInterface $generator;
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'generate:solid-scaffold {name : Name of scaffold}';
+    protected $signature = 'generate:solid-service {name : Service name}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Service generator with interface';
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(LaragenServiceInterface $laragenService)
+    public function __construct(ServiceGeneratorInterface $generator)
     {
-        $this->laragenService = $laragenService;
+        $this->generator = $generator;
         parent::__construct();
     }
 
@@ -43,7 +43,7 @@ class GenerateScaffoldCommand extends Command
     {
         try {
             $name = $this->argument('name');
-            $this->laragenService->generateScaffold($name);
+            $this->generator->generate($name);
             $this->info("Scaffolding for \"{$name}\" has been generated! Have fun!");
         } catch (\Exception $e) {
             $this->error("There is an error during scaffolding generate: " . $e->getMessage());

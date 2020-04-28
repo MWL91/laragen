@@ -3,9 +3,9 @@
 namespace Mwl91\Laragen;
 
 use Illuminate\Support\ServiceProvider;
-use Mwl91\Laragen\Services\LaragenService;
-use Mwl91\Laragen\Commands\GenerateScaffoldCommand;
-use Mwl91\Laragen\Services\Interfaces\LaragenServiceInterface;
+use Mwl91\Laragen\Generators\ServiceGenerator;
+use Mwl91\Laragen\Commands\GenerateServiceCommand;
+use Mwl91\Laragen\Interfaces\ServiceGeneratorInterface;
 
 final class LaragenServiceProvider extends ServiceProvider
 {
@@ -26,15 +26,15 @@ final class LaragenServiceProvider extends ServiceProvider
     private function loadDependencies(): void
     {
         $this->app->bind(
-            LaragenServiceInterface::class,
-            LaragenService::class
+            ServiceGeneratorInterface::class,
+            ServiceGenerator::class
         );
     }
 
     private function loadCommands(): void
     {
         $this->commands([
-            GenerateScaffoldCommand::class
+            GenerateServiceCommand::class
         ]);
     }
 }
