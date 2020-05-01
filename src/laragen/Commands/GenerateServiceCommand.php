@@ -2,51 +2,37 @@
 
 namespace Mwl91\Laragen\Commands;
 
-use Illuminate\Console\Command;
+use Mwl91\Laragen\ValueObjects\MethodParameter;
+use Mwl91\Laragen\ValueObjects\MethodDefinition;
 use Mwl91\Laragen\Interfaces\ServiceGeneratorInterface;
+use Mwl91\Laragen\Commands\InputMethodDefinitionCommand;
 
-class GenerateServiceCommand extends Command
+class GenerateServiceCommand extends InputMethodDefinitionCommand
 {
+
+    const SUCCESS = "Scaffolding for \":name\" has been generated! Have fun!";
+    const ERROR = "There is an error during class generation: ";
+
     private ServiceGeneratorInterface $generator;
 
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'generate:solid-service {name : Service name}';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Service generator with interface';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
     public function __construct(ServiceGeneratorInterface $generator)
     {
         $this->generator = $generator;
         parent::__construct();
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
     public function handle()
     {
         try {
             $name = $this->argument('name');
-            $this->generator->generate($name);
-            $this->info("Scaffolding for \"{$name}\" has been generated! Have fun!");
+
+            $this->generator->generate($name, $this->getMethodsDefinitionInput());
+            $this->info(str_replace(':name', $name, self::SUCCESS));
         } catch (\Exception $e) {
-            $this->error("There is an error during scaffolding generate: " . $e->getMessage());
+            $this->error(self::ERROR . $e->getMessage());
         }
     }
 }
