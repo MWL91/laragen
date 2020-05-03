@@ -25,6 +25,7 @@ class MethodDefinition
     ) {
         $this->name = $name;
         $this->parameters = [];
+        $this->response = null;
         $this->responseNullable = false;
         $this->body = 'return;';
         $this->visibility = $visibility;
@@ -67,7 +68,7 @@ class MethodDefinition
 
         $definition->response = optional($reflectionMethod->getReturnType())->getName();
         if (optional($reflectionMethod->getReturnType())->allowsNull()) {
-            $definition->response = '?' . $reflectionMethod->getReturnType()->getName();
+            $definition->response = $reflectionMethod->getReturnType()->getName();
             $definition->setResponseNullable(true);
         }
 

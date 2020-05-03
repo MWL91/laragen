@@ -14,7 +14,7 @@ class MethodDefinitionTest extends TestCase
 
         $this->assertEquals('getResponse', $methodDefinition->getName());
         $this->assertNotNull($methodDefinition->getBody());
-        $this->assertEquals('?string', $methodDefinition->getResponse());
+        $this->assertEquals('string', $methodDefinition->getResponse());
         $this->assertCount(0, $methodDefinition->getParameters());
         $this->assertTrue($methodDefinition->getResponseNullable());
         $this->assertStringStartsNotWith('{', trim($methodDefinition->getBody()));

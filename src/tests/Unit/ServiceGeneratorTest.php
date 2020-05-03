@@ -79,7 +79,7 @@ class ServiceGeneratorTest extends TestCase
         $methodSum->setParameter(new MethodParameter('float', 'a', true, 10));
         $methodSum->setParameter(new MethodParameter('float', 'b'));
         $methodSum->setBody('return $a + $b;');
-        $methodSum->setResponse('?float');
+        $methodSum->setResponse('float');
         $methodSum->setResponseNullable(true);
 
         return $methodSum;

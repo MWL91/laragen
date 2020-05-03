@@ -4,6 +4,10 @@ SOLID laravel code generator
 
 ## TODO
 
-- Set the same name of value objects / parameters as in refletion class if there are any diffrences
-  - <https://www.php.net/manual/en/class.reflectionclass.php>
-  - <https://www.php.net/manual/en/class.reflectionmethod.php>
+1. Recreating full exisitng classes
+2. Saving methods
+3. Registering binding for service
+
+## In plans
+
+1. Generationg CRUD with Nova, Model, Repository, Service, Controller, routers
