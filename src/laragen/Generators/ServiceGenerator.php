@@ -7,47 +7,45 @@ use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\ClassType;
 use Mwl91\Laragen\Enums\ClassTypeEnum;
 use Mwl91\Laragen\ValueObjects\PhpClass;
+use Mwl91\Laragen\Generators\ClassGenerator;
 use Mwl91\Laragen\Interfaces\ClassGeneratorInterface;
 use Mwl91\Laragen\Interfaces\ServiceGeneratorInterface;
 
-class ServiceGenerator extends Generator implements ClassGeneratorInterface, ServiceGeneratorInterface
+class ServiceGenerator extends ClassGenerator implements ClassGeneratorInterface, ServiceGeneratorInterface
 {
-    private string $name;
+
+    const NAMESPACE_SERVICE = 'App\\Services';
+    const NAMESPACE_SERVICE_INTERFACE = 'App\\Services\\Interfaces';
 
     public function generate(
         string $name,
         array $methodsDefinitions,
-        string $serviceNamespaceString = 'App\\Services',
-        string $serviceInterfaceNamespaceString = 'App\\Services\\Interfaces'
+        string $serviceNamespaceString = self::NAMESPACE_SERVICE,
+        string $serviceInterfaceNamespaceString = self::NAMESPACE_SERVICE_INTERFACE
     ): void {
-        $this->name = $name;
+        $serviceInterface = $this->generateServiceInterface(
+            $name,
+            $methodsDefinitions,
+            $serviceInterfaceNamespaceString
+        );
 
-        $serviceInterface = $this->generateServiceInterface($serviceInterfaceNamespaceString);
-        $serviceClass = $this->generateService($serviceNamespaceString, $serviceInterface);
+        $serviceClass = $this->generateService(
+            $name,
+            $serviceInterface,
+            $methodsDefinitions,
+            $serviceNamespaceString
+        );
 
-        dd($methodsDefinitions, 'inside $methodsDefinitions');
-
-        $method = new Method('count');
-        $method->setReturnType('int');
-        $method->setReturnNullable();
-        $method->setPublic();
-        $method->setBody(null);
-
-
-        $serviceInterface->getClass()->setMethods([$method]);
         echo $serviceInterface->print();
-
-        $method->setBody('return;');
-
-
-        $serviceClass->getClass()->setMethods([$method]);
         echo $serviceClass->print();
     }
 
-    private function generateServiceInterface(
-        string $serviceInterfaceNamespaceString = 'App\\Services\\Interfaces'
+    public function generateServiceInterface(
+        string $name,
+        array $methodsDefinitions,
+        string $serviceInterfaceNamespaceString = self::NAMESPACE_SERVICE_INTERFACE
     ): PhpClass {
-        $interfaceClassName = $this->makeClassName($this->name, ClassTypeEnum::SERVICE_INTERFACE);
+        $interfaceClassName = $this->makeClassName($name, ClassTypeEnum::SERVICE_INTERFACE);
 
         $file = new PhpFile;
         $namespace = $file->addNamespace($serviceInterfaceNamespaceString);
@@ -55,16 +53,25 @@ class ServiceGenerator extends Generator implements ClassGeneratorInterface, Ser
         $class = new ClassType($interfaceClassName, $namespace);
         $class->setInterface();
 
+        $class->setMethods(
+            $this->generateMethodsFromDefinition(
+                $methodsDefinitions,
+                true
+            )
+        );
+
         $namespace->add($class);
 
         return new PhpClass($file, $class);
     }
 
-    private function generateService(
-        string $serviceNamespaceString = 'App\\Services',
-        PhpClass $interface
+    public function generateService(
+        string $name,
+        PhpClass $interface,
+        array $methodsDefinitions,
+        string $serviceNamespaceString = self::NAMESPACE_SERVICE
     ): PhpClass {
-        $className = $this->makeClassName($this->name, ClassTypeEnum::SERVICE);
+        $className = $this->makeClassName($name, ClassTypeEnum::SERVICE);
 
         $file = new PhpFile;
         $namespace = $file->addNamespace($serviceNamespaceString);
@@ -72,6 +79,12 @@ class ServiceGenerator extends Generator implements ClassGeneratorInterface, Ser
 
         $class = new ClassType($className, $namespace);
         $class->addImplement($interface->getName());
+
+        $class->setMethods(
+            $this->generateMethodsFromDefinition(
+                $methodsDefinitions
+            )
+        );
 
         $namespace->add($class);
 

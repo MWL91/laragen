@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Mwl91\Laragen\ValueObjects\MethodParameter;
 use Mwl91\Laragen\ValueObjects\MethodDefinition;
 
-abstract class InputMethodDefinitionCommand extends Command
+abstract class GeneratorCommand extends Command
 {
 
     const ASK_ADD_METHOD = 'Set new method name or press enter to exit';

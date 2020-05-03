@@ -2,12 +2,10 @@
 
 namespace Mwl91\Laragen\Commands;
 
-use Mwl91\Laragen\ValueObjects\MethodParameter;
-use Mwl91\Laragen\ValueObjects\MethodDefinition;
+use Mwl91\Laragen\Commands\GeneratorCommand;
 use Mwl91\Laragen\Interfaces\ServiceGeneratorInterface;
-use Mwl91\Laragen\Commands\InputMethodDefinitionCommand;
 
-class GenerateServiceCommand extends InputMethodDefinitionCommand
+class GenerateServiceCommand extends GeneratorCommand
 {
 
     const SUCCESS = "Scaffolding for \":name\" has been generated! Have fun!";
